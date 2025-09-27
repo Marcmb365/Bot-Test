@@ -83,7 +83,7 @@ async def on_voice_state_update(member: discord.Member, before, after: discord.V
         print("hi")
         user_id = member.id
 
-        WZO_USER_ID = 882213922822832170
+        WZO_USER_ID = 689656574074945580
         VIDEO_LINK = "https://media.discordapp.net/attachments/1273504161866059877/1421353647937421382/v09044g40000cq2kn6vog65lolhs5fcg.mov?ex=68d8ba3d&is=68d768bd&hm=d0c99ec4bbe9827afe4c1b8dc368b5c39be18ce241b9b9f9a79bd5a663e48333&"
         if user_id == WZO_USER_ID:
             channel = discord.utils.get(guild.text_channels, name="main", type=discord.ChannelType.text)
