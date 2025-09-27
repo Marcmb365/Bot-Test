@@ -89,8 +89,13 @@ async def on_ready():
 
 @bot.event
 async def on_message(message: discord.Message):
+    SIX_SEVEN_GIF = 'https://tenor.com/view/scp-067-67-6-7-six-seven-sixty-seven-gif-13940852437921483111'
     if 'majestic' in message.content.lower() and message.author != bot.user:
         await message.channel.send("majesticshadows reference")
+    elif ('6' in message.content and '7' in message.content) and message.author != bot.user:
+        await message.reply(content=f"{SIX_SEVEN_GIF}")
+    elif ('six' in message.content.lower() and 'seven' in message.content.lower()) and message.author != bot.user:
+        await message.reply(content=f"{SIX_SEVEN_GIF}")
 
 @bot.event
 async def on_voice_state_update(member: discord.Member, before, after: discord.VoiceProtocol):
