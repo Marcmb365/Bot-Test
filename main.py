@@ -21,7 +21,7 @@ intents.members = True
 
 running = False
 
-GUILD_ID = 1082610699802517585
+GUILD_ID = 1382198913360203838
 CONFIG = json.loads(open('config.json').read())
 
 bot = commands.Bot(command_prefix=";", intents=intents)
@@ -50,6 +50,10 @@ async def scheduled_dm():
         raise Exception("Guild not found!")
         return
     
+    if not CONFIG.get("SEND_RELIGIOUS_MESSAGE"):
+        print("will not send religious message")
+        return
+    
     for member in guild.members:
         if not member.bot:
             try:
@@ -61,6 +65,18 @@ async def scheduled_dm():
                 print(f"Could not send message to {member.name}.")
                 print(e)
 
+async def smoke_loop():
+    await bot.wait_until_ready()
+    guild = bot.get_guild(GUILD_ID)
+    channel = discord.utils.get(guild.text_channels, name="main", type=discord.ChannelType.text)
+
+    if channel is None:
+        return
+    
+    while True:
+        await channel.send(f"<@{CONFIG.get('SCOPEIVEE_USERID')}> trynna smoke or sum :smoking:")
+        await asyncio.sleep(3600)
+
 @bot.event
 async def on_ready():
     print(f"Server bot started! {bot.user.name}")
@@ -69,10 +85,11 @@ async def on_ready():
     await bot.change_presence(activity=discord.Activity(name="Bruno Mars, Anderson .Paak",type=discord.ActivityType.listening))
     asyncio.create_task(mainLoop(bot.get_guild(GUILD_ID)))
     asyncio.create_task(scheduled_dm())
+    asyncio.create_task(smoke_loop())
 
 @bot.event
 async def on_message(message: discord.Message):
-    if 'majestic' in message.content.lower():
+    if 'majestic' in message.content.lower() and message.author != bot.user:
         await message.channel.send("majesticshadows reference")
 
 @bot.event
@@ -82,12 +99,15 @@ async def on_voice_state_update(member: discord.Member, before, after: discord.V
     if before.channel is None and after.channel is not None:
         print("hi")
         user_id = member.id
+        channel = discord.utils.get(guild.text_channels, name="main", type=discord.ChannelType.text)
 
-        WZO_USER_ID = 689656574074945580
-        VIDEO_LINK = "https://media.discordapp.net/attachments/1273504161866059877/1421353647937421382/v09044g40000cq2kn6vog65lolhs5fcg.mov?ex=68d8ba3d&is=68d768bd&hm=d0c99ec4bbe9827afe4c1b8dc368b5c39be18ce241b9b9f9a79bd5a663e48333&"
-        if user_id == WZO_USER_ID:
-            channel = discord.utils.get(guild.text_channels, name="main", type=discord.ChannelType.text)
-            await channel.send(f"{member.mention} {VIDEO_LINK}")
+        USER_IDS = {
+            1313715323978907693: "https://media.discordapp.net/attachments/1303269364975538196/1421169333530529893/image.png?ex=68d8b755&is=68d765d5&hm=9d2601ddf0707fa410bc22a7e83cfe913299f304a7b1c007f34d8aa82cadfd58&=&format=webp&quality=lossless",
+            689656574074945580: "https://media.discordapp.net/attachments/1273504161866059877/1421353647937421382/v09044g40000cq2kn6vog65lolhs5fcg.mov?ex=68d8ba3d&is=68d768bd&hm=d0c99ec4bbe9827afe4c1b8dc368b5c39be18ce241b9b9f9a79bd5a663e48333&"
+        }
+
+        if USER_IDS.get(user_id) is not None:
+            await channel.send(f"<@{user_id}> {USER_IDS.get(user_id)}")
 
 @bot.tree.command(name="roll",description="Roll the dice",guild=discord.Object(id=GUILD_ID))
 async def roll(interaction: discord.Interaction, min: int, max: int):
@@ -111,7 +131,23 @@ async def randomfact(interaction: discord.Interaction):
 
     await interaction.edit_original_response(content=random_fact)
 
+@bot.tree.command(name="kick", description="Kick a user from the server.", guild=discord.Object(id=GUILD_ID))
+async def kick(interaction: discord.Interaction, user: discord.User):
+    author = interaction.user
 
+    if author.id == CONFIG.get("SCOPEMATT_USERID") or author.id == CONFIG.get("SCOPEIVEE_USERID"):
+        guild = bot.get_guild(GUILD_ID)
+        member = guild.get_member(user.id)
 
+        if member is None:
+            await interaction.response.send_message(f"{user.mention} is not in the server.")
+            return
+
+        try:
+            await member.kick(reason="fuck off")
+            await interaction.response.send_message(f"{user.mention} was kicked from the server.")
+        except Exception as e:
+            await interaction.response.send_message(f"Failed to kick {user.mention}.")
+            print(e)
 
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
