@@ -14,6 +14,8 @@ RANDOM_MESSAGES = [
     "i'm a banana",
     "when your legs don't work like they used to before\nwhen your balls don't smell like they used to before",
     "i'm a cow",
+    "i got a condo in Manhattan",
+    "wzo fuck u retard go pay for ur child suport",
     "i'm a dog",
     "i'm a cat",
     "i'm a fish",
@@ -23,6 +25,7 @@ RANDOM_MESSAGES = [
     "i'm a unicorn",
     "i'm a dragon",
     "kiwami 3 is going to be the GOTY :smiley:",
+    "✝️🙏 This is a Christian blessing chain. If you’re reading this, God has already touched your day with His love. Don’t break the blessing! Send this to 10 friends and watch what happens. Within 24 hours, you’ll hear good news. If you keep it to yourself, nothing bad will happen… but you’ll be missing out on the chance to share His light! 🌟🙏✝️",
 ]
 
 def get_random_message():
