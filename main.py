@@ -102,7 +102,7 @@ async def on_message(message: discord.Message):
 
 @bot.event
 async def on_voice_state_update(member: discord.Member, before, after: discord.VoiceProtocol):
-    print("yo")
+
     guild = bot.get_guild(GUILD_ID)
     if before.channel is None and after.channel is not None:
         print("hi")
