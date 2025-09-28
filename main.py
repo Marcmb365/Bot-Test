@@ -36,6 +36,7 @@ async def mainLoop(guild):
             if channel is None:
                 print("Channel not found!")
                 return
+            await asyncio.sleep(CONFIG.get("RANDOM_MESSAGE_INTERVAL", 180))  # Wait for X minutes
             message = get_random_message()
             await channel.send(message)
             await asyncio.sleep(CONFIG.get("RANDOM_MESSAGE_INTERVAL", 180))  # Wait for X minutes
