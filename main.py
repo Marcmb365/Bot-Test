@@ -111,7 +111,7 @@ async def on_voice_state_update(member: discord.Member, before, after: discord.V
 
         USER_IDS = {
             1313715323978907693: "https://media.discordapp.net/attachments/1303269364975538196/1421169333530529893/image.png?ex=68d8b755&is=68d765d5&hm=9d2601ddf0707fa410bc22a7e83cfe913299f304a7b1c007f34d8aa82cadfd58&=&format=webp&quality=lossless",
-            689656574074945580: "https://media.discordapp.net/attachments/1273504161866059877/1421353647937421382/v09044g40000cq2kn6vog65lolhs5fcg.mov?ex=68d8ba3d&is=68d768bd&hm=d0c99ec4bbe9827afe4c1b8dc368b5c39be18ce241b9b9f9a79bd5a663e48333&"
+            578447958216015872: "https://tenor.com/view/yuimetal-gif-2236335851178412850",
         }
 
         if USER_IDS.get(user_id) is not None:
