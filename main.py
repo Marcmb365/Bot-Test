@@ -39,7 +39,6 @@ async def mainLoop(guild):
             await asyncio.sleep(CONFIG.get("RANDOM_MESSAGE_INTERVAL", 180))  # Wait for X minutes
             message = get_random_message()
             await channel.send(message)
-            await asyncio.sleep(CONFIG.get("RANDOM_MESSAGE_INTERVAL", 180))  # Wait for X minutes
     except asyncio.CancelledError:
         return
 
@@ -105,7 +104,6 @@ async def on_voice_state_update(member: discord.Member, before, after: discord.V
 
     guild = bot.get_guild(GUILD_ID)
     if before.channel is None and after.channel is not None:
-        print("hi")
         user_id = member.id
         channel = discord.utils.get(guild.text_channels, name="main", type=discord.ChannelType.text)
 
