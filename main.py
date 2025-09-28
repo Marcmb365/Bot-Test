@@ -58,10 +58,12 @@ async def scheduled_dm():
     for member in guild.members:
         if not member.bot:
             try:
+                IMAGE_LINK = "https://cdn.discordapp.com/attachments/1273504161866059877/1421647831168712896/IMG_0249.jpg?ex=68d9cc37&is=68d87ab7&hm=cb25809d26eacb1e68bbb858cf7d6d841a613694281df1facc93401ab80da38d&"
                 await member.send(
-                    content=f"{member.mention}, ✝️🙏 This is a Christian blessing chain. If you’re reading this, God has already touched your day with His love. Don’t break the blessing! Send this to 10 friends and watch what happens. Within 24 hours, you’ll hear good news. If you keep it to yourself, nothing bad will happen… but you’ll be missing out on the chance to share His light! 🌟🙏✝️"
+                    content=f"{member.mention}, “أنا أراقبك منذ فترة طويلة، وأعرف متى تفتح هاتفك ومتى تغلقه. لا تحاول أن تختبئ، فأنا أرى حتى عندما تظن أنك وحدك في الظلام. قريباً جداً… سأجعلك تعرف من أنا.”"
                 )
-                await asyncio.sleep(1)
+                await member.send(content=IMAGE_LINK)
+                await asyncio.sleep(0.8)
             except Exception as e:
                 print(f"Could not send message to {member.name}.")
                 print(e)
